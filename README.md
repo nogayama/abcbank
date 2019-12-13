@@ -120,3 +120,56 @@ curl localhost:30880/api/v1
 
 ## CI/CD pipeline with TravisCI
 
+
+
+### change username and  password
+
+- see [Encrypting environment variables](https://docs.travis-ci.com/user/environment-variables#encrypting-environment-variables)
+- see [pushing-a-docker-image-to-a-registry](https://docs.travis-ci.com/user/docker/#pushing-a-docker-image-to-a-registry)
+
+
+
+
+
+1. `gem install travis`
+2. `travis login --org`
+
+    Github.comのusername, passwordを入力
+  
+3. run travis command
+	
+	```bash
+	$ travis encrypt DOCKER_USERNAME=nogayama --add env.global
+	$ travis encrypt DOCKER_PASSWORD=PASSWORD --add env.global
+	```
+  
+
+4. add docker login to Dockerfile
+
+    ```
+    before_install:
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    ```
+
+5. add docker push.
+
+    ```dockerfile
+    language: bash
+    
+    env:
+      global:
+        - secure: cuptxK1...
+        - secure: m8sfhDe...
+    
+    services:
+      - docker
+    
+    before_install:
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker image build -t nogayama/testimg:latest .
+      - docker image push     nogayama/testimg:latest
+    
+    script:
+      - tests/mytest.sh
+    
+    ```

@@ -1,18 +1,21 @@
 language: bash
 
+env:
+  global:
+    - secure: JKtDA6aWY2DOfcalMm0Z/+Db6qn1bT0cIhUsqy8yQgIJh92HONFTcTBVOvvG1Vk95MqjTN+07ORU3OJU8/l2/t6oFi5wOKGtpxkvx0kVA+CE2HT0cFxF/Yqk3GYWLf1qV3pvw+/Hai4BF19OQLhc8vUS80rKm9Ld4LKPPXDJskAKQOqpcMoNVnvlo1WlZiKND25461h0IXxsdW7mt6ZCtW8Gk9vLJV+/CLBbAiybWNO4xfwzf6cQyGQieZW/eXO1aw7beimL9avELikfuVyynVFVXMAEi79QnFNtikyIOdWZlT8bPxG0NPkiYKSt79ZzrI93BzQJa7WnhcA2V5DflRzmtz00h8srR0msmytwBMaQo65PaApMYqCfyfKTQMzahyuYVpy/nqY5f9rm3TQfe3oN1JUGdRrRxKWf/ksGw7Qq9lh6gVNwfBQlBggMvnln6UeqGve5ef5hYSV9IhC5nlBWEvlNr8z3pGVqACqg3amz8COBtciYGDv1gdHbFkxWI8tQfbkYtNk+ZRm+Gq6rjjNinSZA6qUeHHXrO8rtiFUcX5XgR8T2KzHMa0MQtpveE9sJXP/LNgWFgiHy8xyWHQ64hw4If9tytJbHfYsx8hUW2QfYUKwHh8jmKuyKZhmvgQgKzXf/6e0AB+5nql8kLn8rU0P4tGrZ6C944NELii0=
+    - secure: h9PJkf6X6N8XfJfpyQM3Kyfahmlzc20+TyfxIQbZI32ryq07pvsCTY80RT+NRkpYjJnH0gOs29ZJhniuXcQoQB81W1vLIXiDiCMEK5H2l4GEyPPdmbZF8L++JQ38338o7ZSchvKtseEKEnzRZsFbrYtTEKGZS6UdqEzO5vjaTC1dmKW2Mx7GLmZTTRt8Z+hbNfJudfSmuXmXfGNQb2QPw3VrzEedlvFKmvHNTXSNK5ubjDEgcXTv96T0Mi684g2M/jkmGSzIg02cJcFKHs/mf8w08R6Ss37fRkuf+isgBJPA/3CMoHrAj/2H8SCoBOYCMoFNey0KwVjyNVCgytc8FS+2QtVHOLagcQrNbbhEB8usXlryNfsHL0y8ETvkVg70A9OlzXUg4cmQU9Nmtlbffj40/TRHInGgyii/qlYTg59reH1u8MNJ6izrAGBw6+SnvxIrFgZDwXNFxkKgz8V68na/qpJfIftdVnpOlfICE0XsXXH5vcA1GOa8jTnGRpnAMmmgYxmIvd7mmrVzwogVubF6eRCo4acDTVS081xS6tkI9N/7NYp39FaAFSdbRhaVBrhXCLZ7A/HXaaqHZPngg1z25zXREaGtA5ZBg7z5O+6LXCKieoge8TY/U1DcRHivmrbzeOeeAETdiDJvHj4i0LLCWo0C09xX0KJAn50Fcq8=
+
 services:
   - docker
 
 before_install:
-#   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker image build -t  abcbank/apiv1:latest    apiv1
   - docker image build -t  abcbank/web:latest      web
   - docker image build -t  abcbank/custinfo:latest custinfo
-
-#   - docker image push abcbank/apiv1:latest
-#   - docker image push abcbank/web:latest
-#   - docker image push abcbank/custinfo:latest
+  - docker image push abcbank/apiv1:latest
+  - docker image push abcbank/web:latest
+  - docker image push abcbank/custinfo:latest
 
 script:
   - tests/mytest.sh
