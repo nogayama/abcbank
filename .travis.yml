@@ -4,7 +4,7 @@ services:
   - docker
 
 before_install:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+#   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   
   - docker image build -t  abcbank/apiv1:latest    apiv1
   - docker image build -t  abcbank/web:latest      web
