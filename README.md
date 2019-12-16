@@ -193,7 +193,7 @@ curl -s -X POST \
    -H "Content-Type: application/json" \
    -H "Accept: application/json" \
    -H "Travis-API-Version: 3" \
-   -H "Authorization: token Esrq61nHBeyqgW0glbMzJA" \
+   -H "Authorization: token XXXX" \
    -d "$body" \
    https://api.travis-ci.org/repo/nogayama%2Fabcbank/requests
 
