@@ -143,7 +143,6 @@ curl localhost:30880/api/v1
 	$ travis encrypt DOCKER_PASSWORD=PASSWORD --add env.global
 	```
   
-
 4. add docker login to Dockerfile
 
     ```
@@ -173,3 +172,31 @@ curl localhost:30880/api/v1
       - tests/mytest.sh
     
     ```
+
+
+
+### kick cicd pipeline
+
+
+
+TravisCI.orgにログインし，ユーザーのSettingの SettingsタブのAPI authenticationのTokenをコピーし，いかの`XXXX`の部分を置換する．
+
+
+
+```bash
+body='{
+"request": {
+"branch":"master"
+}}'
+
+curl -s -X POST \
+   -H "Content-Type: application/json" \
+   -H "Accept: application/json" \
+   -H "Travis-API-Version: 3" \
+   -H "Authorization: token Esrq61nHBeyqgW0glbMzJA" \
+   -d "$body" \
+   https://api.travis-ci.org/repo/nogayama%2Fabcbank/requests
+
+
+```
+

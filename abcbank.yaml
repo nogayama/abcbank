@@ -4,6 +4,7 @@ metadata:
   name: custinfo
   labels:
     app: custinfo
+    appid: 7A252155
 spec:
   hostname: custinfo
   containers:
@@ -72,3 +73,15 @@ spec:
       nodePort: 30880
   selector:
     appid: 27AD61BD
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: custinfo
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5000
+  selector:
+    appid: 7A252155
+    
