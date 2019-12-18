@@ -1,28 +1,20 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
   name: custinfo
+  labels:
+    app: custinfo
+    appid: 7A252155
 spec:
-  selector:
-    matchLabels:
-      app: custinfo
-  replicas: 1
-  template:
-    metadata:
+  hostname: custinfo
+  containers:
+    - image: abcbank/custinfo:latest
       name: custinfo
-      labels:
-        app: custinfo
-        appid: 7A252155
-    spec:
-      hostname: custinfo
-      containers:
-        - image: abcbank/custinfo:latest
-          name: custinfo
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 5000
-              name: http
-              protocol: TCP
+      imagePullPolicy: Always
+      ports:
+        - containerPort: 5000
+          name: http
+          protocol: TCP
 ---
 apiVersion: v1
 kind: Pod

@@ -1,0 +1,10 @@
+apiVersion: actioncontroller.k8s.io/v1alpha1
+kind: ActionPolicy
+metadata:
+  name: abcbank
+spec:
+  action: "rebuild"
+  deploymentName: "custinfo"
+  imageHash: "sha256:418ebf869f2159654a7639816208914e868689b70d3de7d53e4ee120ee9ac783"
+  ciCdUrl: "travis-ci.org/nogayama/abcbank"
+  ciCdToken: "Esrq61nHBeyqgW0glbMzJA"
